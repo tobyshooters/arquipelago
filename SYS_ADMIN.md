@@ -3,13 +3,37 @@ I can access via root with: `ssh root@185.193.126.243`
 Because I've configured the DNS for my domain, I can also just do
 `ssh root@arquipelago.org`.
 
-User `aventura` was created.
-`useradd aventura -g aventura`
+Group and user `aventura` was created.
+```
+groupadd aventura
+useradd aventura -g aventura
+mkdir /home/aventura
+chown aventura:aventura /home/aventura
+```
+
 
 You can pretend to by a user using `sudo su - aventura`. This makes sures that
-folders created are attributed to the correct user and group.
+subsequent folders created are attributed to the correct user and group.
 
-Otherwise, you have to `chown aventura:aventura /home/aventura`
+Otherwise, you have to `chown aventura:aventura $DIR`
+
+It's also nice to make sure that other users can read, but not edit each
+other's home directory, via `chmod 744 /home/aventura`. This is in the spirit
+of knowledge sharing, but avoiding accidents or abuse.
+
+TODO: I think I need to actually set permissions for sub-folders, not just 744
+on the parent.
+
+```
+/home/...
+
+0 drwxr-xr-x 1 root      root       42 Oct 24 13:16 .
+0 drwxr-xr-x 1 root      root      154 Oct 14 16:15 ..
+0 drwxr--r-- 1 aventura  aventura   14 Oct 14 16:47 aventura
+0 drwxr--r-- 1 cristobal cristobal  14 Oct 24 13:20 cristobal
+0 drwxr--r-- 1 root      root        6 Oct 14 16:39 root
+
+```
 
 Created a folder for them at `/home/aventura` with `/home/aventura/www` as the
 place serving from Caddy.
@@ -27,8 +51,12 @@ place serving from Caddy.
 ```
 
 For `aventura` to be able to SSH, I've:
-(1) Added them to the `AllowUsers` in `/etc/ssh/sshd_config`
-(2) I've added my own public key to `/home/aventura/.ssh/authorized_keys`
+
+1. Added them to the `AllowUsers` in `/etc/ssh/sshd_config`
+2. I've added my own public key to `/home/aventura/.ssh/authorized_keys`
+3. Restarting the SSH daemon `systemctl restart ssh`
+
+The public key can usually be found via: `cat ~/.ssh/id_ed25519.pub `
 
 Note, this probably only works because the OS has some default mapping between
 users and home folders that I'm depending on. Hence, 
