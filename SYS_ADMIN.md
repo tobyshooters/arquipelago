@@ -3,6 +3,8 @@ I can access via root with: `ssh root@185.193.126.243`
 Because I've configured the DNS for my domain, I can also just do
 `ssh root@arquipelago.org`.
 
+Some utils were installed: `apt install vim rsync tree`
+
 Group and user `aventura` was created.
 ```
 groupadd aventura
@@ -68,3 +70,11 @@ wildcard DNS record, e.g. `*.arquipelago.org`.
 
 The Caddyfile is at `/root` and the server can be started or stopped based
 on that Caddyfile (if you're in that directory!).
+
+
+TODO:
+
+- [ ] Figure out how to do back-ups? Perhaps the source of truth is each user's
+      computer, and not the server.
+- [ ] Figure out DNS records for subdomains without a record for each user.
+- [ ] Figure out bandwidth of images and videos.

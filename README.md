@@ -1,1 +1,1 @@
-Notes and files for `arquipelago.org`
+notes and files for `arquipelago.org`
