@@ -14,6 +14,7 @@ Otherwise, you have to `chown aventura:aventura /home/aventura`
 Created a folder for them at `/home/aventura` with `/home/aventura/www` as the
 place serving from Caddy.
 
+```
 /home
 ├── aventura
 │   ├── .ssh
@@ -23,6 +24,7 @@ place serving from Caddy.
 └── root
     └── www
         └── index.html
+```
 
 For `aventura` to be able to SSH, I've:
 (1) Added them to the `AllowUsers` in `/etc/ssh/sshd_config`
