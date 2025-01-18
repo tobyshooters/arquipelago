@@ -1,0 +1,46 @@
+{
+    email cristobal.sciutto@gmail.com
+}
+
+arquipelago.org {
+	root * /home/root/www
+	try_files {path}.html
+	file_server
+}
+
+cristobal.arquipelago.org {
+	root * /home/cristobal/www
+	try_files {path}.html
+	file_server
+}
+
+cristobal.space {
+	root * /home/cristobal/www
+	try_files {path}.html
+	file_server
+}
+
+aventura.arquipelago.org {
+	root * /home/aventura/www
+	try_files {path}.html
+	file_server
+}
+
+rafael.arquipelago.org {
+    root * /home/root/www/rafael
+    try_files {path}.html /portfolio.pdf
+    file_server
+}
+
+tato.arquipelago.org {
+	root * /home/root/www/tato
+	try_files {path}.html
+	file_server
+}
+
+www.audiotato.com, audiotato.com {
+	root * /home/root/www/tato
+	try_files {path}.html
+	file_server
+}
+
