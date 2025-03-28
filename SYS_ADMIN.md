@@ -6,13 +6,15 @@ Because I've configured the DNS for my domain, I can also just do
 Some utils were installed: `apt install vim rsync tree`
 
 Group and user `aventura` was created.
-```
-groupadd aventura
-useradd aventura -g aventura
-mkdir /home/aventura
-chown aventura:aventura /home/aventura
-```
+Note that `-m` also create the home directory.
 
+```
+sudo groupadd aventura
+useradd -m aventura -g aventura
+sudo chmod 744 /home/aventura
+sudo chown -R aventura:aventura /home/aventura
+sudo chsh -s /bin/bash username
+```
 
 You can pretend to by a user using `sudo su - aventura`. This makes sures that
 subsequent folders created are attributed to the correct user and group.
@@ -24,7 +26,8 @@ other's home directory, via `chmod 744 /home/aventura`. This is in the spirit
 of knowledge sharing, but avoiding accidents or abuse.
 
 TODO: I think I need to actually set permissions for sub-folders, not just 744
-on the parent.
+on the parent. I'm told something like `echo "umask 077" | sudo tee -a
+/home/newuser/.bashrc` is the way to go.
 
 ```
 /home/...
@@ -64,12 +67,22 @@ Note, this probably only works because the OS has some default mapping between
 users and home folders that I'm depending on. Hence, 
 `ssh aventura@arquipelago.org` knows where to look for the matching keys.
 
+
+To copy files over from a git repo, prefer to leave the git repo local:
+
+```
+cd ~/dev/tato
+git pull
+rsync -vrz --exclude .git . root@arquipelago.org:/home/tato/www
+```
+
+
 The server is using Caddy to serve file_servers for each `/home/$USER/www`.
 For some reason, HTTPS configuration was failing on these when I tried to use a
 wildcard DNS record, e.g. `*.arquipelago.org`.
 
 The Caddyfile is at `/root` and the server can be started or stopped based
-on that Caddyfile (if you're in that directory!).
+on that Caddyfile (if you're in that directory!). `caddy reload`
 
 
 TODO:

@@ -28,18 +28,24 @@ aventura.arquipelago.org {
 
 rafael.arquipelago.org {
     root * /home/root/www/rafael
-    try_files {path}.html /portfolio.pdf
+    try_files {path}.html {path}.pdf /portfolio.pdf
     file_server
 }
 
+oobo.arquipelago.org {
+	root * /home/root/www/oobo
+	try_files {path}.html
+	file_server
+}
+
 tato.arquipelago.org {
-	root * /home/root/www/tato
+	root * /home/tato/www
 	try_files {path}.html
 	file_server
 }
 
 www.audiotato.com, audiotato.com {
-	root * /home/root/www/tato
+	root * /home/tato/www
 	try_files {path}.html
 	file_server
 }
