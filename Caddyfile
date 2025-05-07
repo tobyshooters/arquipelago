@@ -1,5 +1,5 @@
 {
-    email cristobal.sciutto@gmail.com
+	email cristobal.sciutto@gmail.com
 }
 
 arquipelago.org {
@@ -27,9 +27,9 @@ aventura.arquipelago.org {
 }
 
 rafael.arquipelago.org {
-    root * /home/root/www/rafael
-    try_files {path}.html {path}.pdf /portfolio.pdf
-    file_server
+	root * /home/root/www/rafael
+	try_files {path}.html {path}.pdf /portfolio.pdf
+	file_server
 }
 
 oobo.arquipelago.org {
@@ -50,3 +50,28 @@ www.audiotato.com, audiotato.com {
 	file_server
 }
 
+screenshot.arquipelago.org {
+	root * /home/root/www/screenshot
+	try_files {path}.html
+	file_server
+}
+
+qamnqn.arquipelago.org {
+	root * /home/qamnqn/www
+	try_files {path}.html {path} =404
+	file_server
+
+	handle_errors {
+		@404 {
+			expression {http.error.status_code} == 404
+		}
+		handle @404 {
+			reverse_proxy https://ubu-mirror.ch {
+				header_up Host ubu-mirror.ch
+				transport http {
+					tls
+				}
+			}
+		}
+	}
+}
