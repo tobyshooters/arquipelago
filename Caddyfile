@@ -56,8 +56,8 @@ screenshot.arquipelago.org {
 	file_server
 }
 
-qamnqn.arquipelago.org {
-	root * /home/qamnqn/www
+qamnqn.arquipelago.org, qamnqn.org {
+	root * /home/qamnqn/www/ubu.com
 	try_files {path}.html {path} =404
 	file_server
 
