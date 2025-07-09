@@ -35,7 +35,7 @@ rafael.arquipelago.org {
 oobo.arquipelago.org {
 	root * /home/root/www/oobo
 	try_files {path}.html
-	file_server
+	file_server browse
 }
 
 tato.arquipelago.org {
